@@ -52,3 +52,45 @@ curl -X POST http://127.0.0.1:8000/analizar \
     ]
 }
 ```
+
+
+**Estructura de lo que hay en la llave principal data**
+
+ """
+    Una lista de capítulos, cada uno con sus respectivos subcapítulos,
+    incluyendo análisis, categorías y datos extraídos.
+
+    Returns:
+        List[Capitulo]: Una lista de capítulos, donde cada capítulo contiene una lista
+                        de subcapítulos con información detallada.
+
+    Ejemplo de salida:
+    [
+        {
+            'nombre_capitulo': 'EXPLORACIÓN GENERAL DE LA CATEGORÍA',
+            'sub_capitulos': [
+                {
+                    'nombre_subcapitulo': 'ASOCIACIONES ESPONTÁNEAS',
+                    'extraccion_datos': '### Extracción de Datos...',
+                    'categorizar_clasificar': '### Categorías y Caracterización...',
+                    'analisis': '### Análisis Descriptivo...',
+                    'por_que': '### Análisis Explicativo...',
+                    'informe': '### Informe Final:...'
+                }
+                # Más subcapítulos...
+            ]
+        }
+        # Más capítulos...
+    ]
+    """
+**Ejemplo de como construir el informe**
+informe = ""
+
+```python
+for capitulo in respuesta['data']:
+    print('Capitulo: ', capitulo['nombre_capitulo'], '\n\n')
+
+    for subcapitulo in capitulo['sub_capitulos']:
+        print('Subcapitulo:', subcapitulo['nombre_subcapitulo'], '\n\n')
+        print(subcapitulo['informe'], '\n\n')
+```
