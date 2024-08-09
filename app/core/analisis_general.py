@@ -117,7 +117,7 @@ def analisis_general(url_excel:str, url_pdf_esquema:str, url_pdf_context:str)->S
 
             sub_capitulos.append(dic_sub_capitulo)
 
-            break
+            #break
 
         nombre_capitulo = list_cap[cap][0] # obtengo el nombre del capitulo
 
@@ -125,6 +125,6 @@ def analisis_general(url_excel:str, url_pdf_esquema:str, url_pdf_context:str)->S
 
         lista_analisis_capitulos.append(dic_analisis_cap)
 
-        break
+        #break
 
     return lista_analisis_capitulos
