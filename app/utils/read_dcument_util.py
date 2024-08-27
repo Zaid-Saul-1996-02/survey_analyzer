@@ -21,13 +21,16 @@ def pdf_to_text(pdf_url:str) -> list:
     
 
 def get_data_excel(url_excel:str) -> list[list]:
-    
+
     df_excel = pd.read_excel(url_excel)
 
     df_excel.iloc[:,0].fillna(method='ffill', inplace=True)
 
     index_pos = df_excel.index[df_excel.iloc[:, 1].notna()].tolist()
-    index_pos.append(df_excel.index[-1])
+    if df_excel.index[-1] > index_pos[-1]:
+        index_pos.append(df_excel.index[-1])
+    else:
+        index_pos.append(index_pos[-1] + 1)
     m_col = df_excel.shape[1]
 
     list_cap = []
