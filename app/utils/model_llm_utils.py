@@ -298,14 +298,14 @@ def informe(texto_analisis_subcapitulo:str) -> str:
             seed = 250
             )
 
-        respuesta = response.choices[0].message.content
+        respuesta_1 = response.choices[0].message.content
 
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": system_message},
                 {"role": "user", "content": user_message},
-                {"role": "assistant", "content": respuesta},
+                {"role": "assistant", "content": respuesta_1},
                 {"role": "user", "content": user_message_2}
             ],
             temperature=0.3,
@@ -313,8 +313,8 @@ def informe(texto_analisis_subcapitulo:str) -> str:
             seed = 250
             )
         
-        respuesta = response.choices[0].message.content
+        respuesta_2 = response.choices[0].message.content
 
-        return respuesta
+        return respuesta_1, respuesta_2
     except:
-        return ""
+        return "", ""
