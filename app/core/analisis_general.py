@@ -111,9 +111,9 @@ def analisis_general(url_excel:str, url_pdf_esquema:str, url_pdf_context:str)->S
 
             texto_analisis_subcapitulo += text_refact_porque
 
-            informe_sub = informe(texto_analisis_subcapitulo)
+            informe_sub_1, informe_sub_2 = informe(texto_analisis_subcapitulo)
 
-            dic_sub_capitulo = {'nombre_subcapitulo': sub_cap[1], 'extraccion_datos': texto_extraccion_datos, 'categorizar_clasificar':texto_categorizar_clasificar, 'analisis': texto_analisis, 'por_que':text_refact_porque, 'informe':informe_sub}
+            dic_sub_capitulo = {'nombre_subcapitulo': sub_cap[1], 'extraccion_datos': texto_extraccion_datos, 'categorizar_clasificar':texto_categorizar_clasificar, 'analisis': texto_analisis, 'por_que':text_refact_porque, 'informe_preliminar':informe_sub_1, 'informe':informe_sub_2}
 
             sub_capitulos.append(dic_sub_capitulo)
 
