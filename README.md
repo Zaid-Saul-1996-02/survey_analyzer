@@ -94,3 +94,56 @@ for capitulo in respuesta['data']:
         print('Subcapitulo:', subcapitulo['nombre_subcapitulo'], '\n\n')
         print(subcapitulo['informe'], '\n\n')
 ```
+
+
+### Endpoint del Bot
+
+**URL**: `/bot`
+
+**Método**: `POST`
+
+**Headers**:
+- `Content-Type: application/json`
+- `api_key_auth: <tu_api_key>`
+
+**Body**:
+```json
+{
+    "user_id": "usuario123",
+    "mensaje": "Hola, ¿cómo estás?",
+    "url_matriz": "http://example.com/matriz"
+}
+```
+
+**Descripción**:
+Este endpoint permite a los usuarios enviar un mensaje al bot, junto con un identificador de usuario y una URL de matriz. El bot procesará el mensaje y devolverá una respuesta generada.
+
+**Comando CURL**:
+```sh
+curl -X POST http://127.0.0.1:8000/bot \
+    -H "Content-Type: application/json" \
+    -H "api_key_auth: <tu_api_key>" \
+    -d '{
+        "user_id": "usuario123",
+        "mensaje": "Hola, ¿cómo estás?",
+        "url_matriz": "http://example.com/matriz"
+    }'
+```
+
+**Respuesta Exitosa**:
+```json
+{
+    "ai_message": "¡Hola! Estoy aquí para ayudarte. ¿En qué puedo asistirte hoy?"
+}
+```
+
+**Códigos de Estado**:
+- `200 OK`: La solicitud fue exitosa y el bot respondió correctamente.
+- `403 Forbidden`: La API key proporcionada no es válida.
+- `422 Unprocessable Entity`: Hubo un error al procesar la solicitud.
+- `500 Internal Server Error`: Ocurrió un error inesperado en el servidor.
+
+**Notas**:
+- Asegúrate de reemplazar `<tu_api_key>` con una API key válida.
+- El `user_id` es utilizado para identificar al usuario que envía el mensaje.
+- La `url_matriz` es un recurso adicional que el bot puede utilizar para generar su respuesta.
