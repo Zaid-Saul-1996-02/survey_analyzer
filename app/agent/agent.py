@@ -9,6 +9,8 @@ from agent.utils_agent.edges_agent import get_state_init, get_state_chat
 
 from agent.utils_agent.utils_db.db_mongo_utils import MongoDbAgent
 
+from os import getenv
+
 def agent(user_id:str, mensaje:str, url_matriz:str, url_contexto:str) -> str:
     
     memory = MemorySaver()
@@ -34,6 +36,7 @@ def agent(user_id:str, mensaje:str, url_matriz:str, url_contexto:str) -> str:
     try:
         state_values = MongoDbAgent().load_state(conversation_id) # aqui cargo el checkpointer de la DB
     except Exception as e:
+        print(getenv("URI_MONGO"))
         return 'Lo siento, se ha presentado un problema de conexion, espera unos segundos y vuelveremos a conversar'
 
     config = {"configurable": {"thread_id": conversation_id}}
