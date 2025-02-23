@@ -81,6 +81,8 @@ La API estará disponible en `http://127.0.0.1:8000`.
 
 La API sigue el estándar OpenAPI 3.1, y la documentación completa se puede encontrar en `http://127.0.0.1:8000/docs`.
 
+Puede ver un video de prueba de la API en `https://drive.google.com/file/d/1N-DVQDXp-ccLGMW4ZLR1ldyil5-VLrSX/view?usp=drive_link`.  
+
 ## Endpoints
 
 ### 1. Analizar
