@@ -1,4 +1,88 @@
 
+# Survey Analyzer  
+
+Este proyecto tiene como objetivo analizar una encuesta y generar un informe con los resultados.
+Ademas un chatbot para responder preguntas sobre una encuesta.
+Fue desarrollado aplicando IA Generativa y IA RAG (Recuperación de información basada en el contenido) con OpenAI, Langchain, Langgraph, FastAPI y el motor de base de datos MongoDB. Para las partes de procesamiento de datos se utilizó la libreria de Pandas.
+En la parte de la IA Generativa se aplico el modelo GPT-4o y GPT-4o-mini.
+
+## Estructura del Proyecto
+
+El proyecto está organizado de la siguiente manera:  
+
+- **`app/main.py`**: Punto de entrada de la aplicación FastAPI.
+- **`app/core/dependencies.py`**: Contiene las dependencias comunes, como la validación de la API key (`get_api_key`).
+- **`app/schemas/shema.py`**: Define los esquemas Pydantic para la validación de datos, como `RequestDataLk`.
+- **`app/services/agent/agent.py`**: Contiene la lógica de negocio para generar el plan de acción (`agent`).
+- **`app/services/analisis/analisis_general.py`**: Contiene la lógica de negocio para generar el plan de acción (`analisis_general`).
+- **`app/routers/`**: Contiene los routers de la API, como el router para el endpoint `/analizar` y `/bot`.
+
+## Instalación
+
+Para ejecutar el proyecto, se requiere:
+- Python 3.12, recomendado: (3.12.8)
+- Api Key para OpenAI.
+
+Variables de entorno:  
+
+- `OPENAI_API_KEY`: Clave de API para OpenAI.  
+- `API_KEY_AUTH`: Clave de API para la autenticación.  
+- `URI_MONGO`: URI de la base de datos MongoDB.
+- `NAME_DB_MONGO`: Nombre de la base de datos MongoDB.
+- `NAME_VECTOR_COLLECTION_DB_MONGO`: Nombre de la colección MongoDB para los vectores.
+- `NAME_STATE_COLLECTION_DB_MONGO`: Nombre de la colección MongoDB para el estado de la conversación.
+
+Se recomienda usar un entorno virtual para instalar las dependencias:
+
+```bash (Linux/MacOS)
+python -m venv nombre-del-entorno
+source nombre-del-entorno/bin/activate
+```
+
+```bash (Windows)
+python -m venv nombre-del-entorno
+nombre-del-entorno\Scripts\activate
+```
+
+1. **Clona el repositorio:**
+
+```bash
+git clone https://github.com/edistone/survey_analyzer.git
+cd survey_analyzer
+```
+
+2. **Instala las dependencias:**
+
+```bash
+pip install -r requirements.txt
+```
+
+3. **Ejecuta la aplicación:**
+
+De esta manera se ejecuta la aplicación en modo de desarrollo y se reinicia automáticamente al guardar cambios:  
+
+```bash
+fastapi dev main.py
+```
+
+```bash
+uvicorn app.main:app --reload
+```
+
+O de esta manera se ejecuta la aplicación en modo de producción:
+
+```bash
+uvicorn app.main:app
+```
+
+La API estará disponible en `http://127.0.0.1:8000`.
+
+## Documentación de la API
+
+La API sigue el estándar OpenAPI 3.1, y la documentación completa se puede encontrar en `http://127.0.0.1:8000/docs`.
+
+## Endpoints
+
 ### 1. Analizar
 
 **URL**: `/analizar`
@@ -29,8 +113,6 @@ curl -X POST http://127.0.0.1:8000/analizar \
     "url_pdf_context": "https://sample.edistone.net/files/Project/Agent/2839-Contexto.pdf"
 }'
 ```
-
-
 
 **Salida:**
 ```json
@@ -94,7 +176,6 @@ for capitulo in respuesta['data']:
         print('Subcapitulo:', subcapitulo['nombre_subcapitulo'], '\n\n')
         print(subcapitulo['informe'], '\n\n')
 ```
-
 
 ### Endpoint del Bot
 

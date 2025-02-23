@@ -1,8 +1,12 @@
 from pymongo import MongoClient
-import re
 from os import getenv
 from dotenv import load_dotenv
-from typing import Optional, Tuple, Any
+from typing import Optional, Any
+from langchain.schema import (
+    SystemMessage, 
+    HumanMessage, 
+    AIMessage
+) # Esto es necesario para el eval del checkpointer
 
 load_dotenv()
 
@@ -29,7 +33,7 @@ class MongoDbAgent(object):
 
         if document:
             state_values = document.get('state_values', '')
-            
+            state_values = eval(state_values)
             return state_values
 
         return None # Aqui no quiero manejar la excepcion, lo necesito hacer por logica donde uso el metodo
